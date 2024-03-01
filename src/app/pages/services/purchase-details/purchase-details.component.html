@@ -1,0 +1,65 @@
+<div class="container-fluid">
+    <div class="row layout-top-spacing">
+        <div class="shopping_cart_area">
+            <div class="col-12">
+                <div class="table_desc">
+                    <div class="cart_page">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>S.No</th>
+
+                                        <th>Image</th>
+                                        <th>Product</th>
+                                        <th>Price</th>
+                                        <th>Discount Price</th>
+                                        <th>Total Price</th>
+                                        <!-- <th>Quantity</th> --> 
+                                        <th>Request Id</th>
+                                        <th>Order Date</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody> 
+                                    <tr *ngFor="let product of details let i = index ">
+                                        <td>{{i+1}}</td>
+
+                                        <td class="product_thumb">
+                                            <a href="{{product.image}}" target="_blank"><img src="{{product.image}}" alt=""></a>
+                                        </td>
+                                        <td class="product_name"><a href="#">{{product.productname}}</a></td>
+                                        <td class="product-price"><i class="fa fa-rupee"></i> {{product.price}}
+                                        </td>
+                                        <td class="product-price"><i class="fa fa-rupee"></i> {{product.discount}}
+                                        </td>
+                                        <td class="product-price"><i class="fa fa-rupee"></i> {{product.admin_price}}
+                                        </td>
+                                        <!-- <td class="product_quantity">
+                                            <span><b>1</b></span> -->
+                                        <!-- <input readonly min="1" max="3" value="1" class="itemQuantity"
+                                                    name="itemQuantity"> -->
+                                        <!-- </td> --> 
+                                        <td class="product_total">{{product.id}}</td>
+                                        <td class="product_total">
+
+                                            {{ product.created_at | date:'medium'}}
+
+                                        </td>
+                                        <td class="product_total" id="productTotal1">
+                                            <div class="td-content"><span class="badge {{product.status === 'Rejected'?'btn-danger':product.status === 'Requested'?'btn-warning':'btn-success'}}">{{product.status}}</span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr *ngIf="details == [] || details.length == 0">
+                                        <td class="text-center" colspan="100%">No Record Found</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

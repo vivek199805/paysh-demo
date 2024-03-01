@@ -1,0 +1,44 @@
+
+ <div class="layout-px-spacing">
+    <div class="row layout-top-spacing">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
+            <div class="widget">
+                <div class="row">
+
+                   
+                    <div class="col-md-4 mb-2" *ngFor="let list of productdata">
+                        <div class="product-list-wrap border ">
+                            <div class="img-wrap">
+                                <img [src]="list.image" alt="">
+                            </div>
+                            <!-- /.img-wrap -->
+                            <div class="content-wrap p-4">
+                                <h4>{{list.product}}<i class="fa fa-info-circle float-right"></i></h4>
+                                <p>{{list.description}}</p>
+
+                                <div class="og-price d-flex justify-content-between align-item-end">
+                                    <span>One Time Activation Free</span>
+                                    <span class="uat">LIVE MODE</span>
+                                </div>
+                                <!-- /.og-price -->
+                                <div class="gst-price d-flex justify-content-between align-item-end">
+                                    <h5>{{list.price}} +GST</h5>
+                                </div>
+                                <!-- /.gst-price -->
+                                <!-- <button type="button" class="btn lightgrey mr-3"><i class="fa fa-eye"></i> Know More</button> -->
+                                <div >
+                                <button *ngIf="list.reqstatus == 7" type="button" (click)="purchase_req(list)" class="btn btn-primary pulse">
+                                    <i class="fa fa-plus"></i>Purchase Request</button>
+                                </div>
+                                <button type="button" *ngIf="list.reqstatus != 7"  class="btn btn-warning pulse">
+                                     {{list.status}} </button>
+                                </div>
+                                <!-- /.disc-price -->
+                            </div>
+                            <!-- /.content-wrap -->
+                        </div> 
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

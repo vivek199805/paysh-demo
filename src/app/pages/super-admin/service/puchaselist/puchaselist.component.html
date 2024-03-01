@@ -1,0 +1,135 @@
+<div class="container-fluid">
+    <div class="row layout-top-spacing">
+        <div class="shopping_cart_area">
+            <div class="col-12">
+                <div class="table_desc">
+                    <div class="cart_page">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>S.No</th>
+
+                                        <th>Image</th>
+                                        <th>Product</th>
+                                        <th>Price</th>
+                                        <th>Discount Price</th>
+                                        <th>Total Price</th>
+                                        <!-- <th>Quantity</th> -->
+                                        <th>Request Id</th>
+                                        <th>Order Date</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let product of details let i = index ">
+                                        <td>{{i+1}}</td>
+
+                                        <td class="product_thumb">
+                                            <a href="{{product.image}}" target="_blank"><img src="{{product.image}}"
+                                                    alt=""></a>
+                                        </td>
+                                        <td class="product_name"><a href="#">{{product.productname}}</a></td>
+                                        <td class="product-price"><i class="fa fa-rupee"></i> {{product.price}}
+                                        </td>
+                                        <td class="product-price"><i class="fa fa-rupee"></i> {{product.discount}}
+                                        </td>
+                                        <td class="product-price"><i class="fa fa-rupee"></i> {{product.admin_price}}
+                                        </td>
+                                        <!-- <td class="product_quantity">
+                                            <span><b>1</b></span> -->
+                                        <!-- <input readonly min="1" max="3" value="1" class="itemQuantity"
+                                                    name="itemQuantity"> -->
+                                        <!-- </td> -->
+                                        <td class="product_total">{{product.id}}</td>
+                                        <td class="product_total">
+
+                                            {{ product.created_at | date:'medium'}}
+
+                                        </td>
+                                        <td class="product_total" id="productTotal1">
+                                            <div class="td-content"><span
+                                                    class="badge {{product.status === 'Rejected'?'btn-danger':product.status === 'Requested'?'btn-warning':'btn-success'}}">{{product.status}}</span>
+                                            </div>
+                                        </td>
+                                        <td class="product_total" id="productTotal1">
+                                            <div class="td-content" *ngIf="product.status === 'Rejected' || product.status === 'Purchased'">
+                                                <span>No Action Found</span>
+                                            </div>
+                                            
+                                            <div class="td-content" *ngIf="product.status ==='Requested'">
+                                                <button (click)="action(product)"
+                                                    class="badge sucess-btn"><span>Action</span></button>
+                                            </div>
+                                        </td>
+                        </tr>
+                        <tr *ngIf="details == [] || details.length == 0">
+                            <td class="text-center" colspan="100%">No Record Found</td>
+                        </tr>
+                        </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+
+<div class="modal fade" id="kycStatusModel" data-toggle="modal" data-backdrop="static" data-keyboard="false"
+    tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog signup" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <!-- <button type="button" class="close" data-dismiss="modal">x</button> -->
+                <h4 class="modal-title" id="myModalLabel">Purchase Action</h4>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="form" class="mt-3" (submit)="onSubmit()">
+                    <label for="inputAddress">Type : <span class="alert-error">*</span></label><br>
+                    <label class="new-control new-radio new-radio-text radio-success">
+                        <input [(ngModel)]="type" formControlName="type" type="radio" class="new-control-input"
+                            value="0">
+                        <span class="new-control-indicator"></span><span class="new-radio-content">No Discount</span>
+                    </label>
+                    <label class="new-control new-radio new-radio-text radio-danger">
+                        <input [(ngModel)]="type" formControlName="type" type="radio" class="new-control-input"
+                            value="1">
+                        <span class="new-control-indicator"></span><span class="new-radio-content">Discount</span>
+                    </label> <br>
+                    <label for="inputAddress">Action : <span class="alert-error">*</span></label><br>
+                    <label class="new-control new-radio new-radio-text radio-success">
+                        <input formControlName="action" type="radio" class="new-control-input" value="1">
+                        <span class="new-control-indicator"></span><span class="new-radio-content">Approved</span>
+                    </label>
+                    <label class="new-control new-radio new-radio-text radio-danger">
+                        <input formControlName="action" type="radio" class="new-control-input" value="0">
+                        <span class="new-control-indicator"></span><span class="new-radio-content">Reject</span>
+                    </label> <br>
+                    <div class="form-row" *ngIf="type == 1">
+                        <div class="form-group col-md-12">
+                            <label for="inputAddress">Discount Amount :</label>
+                            <input type="text" formControlName="discount" class="form-control" autocomplete="off"
+                                placeholder="Enter Discount Amount">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                            <label for="inputAddress">Remark : <span class="alert-error">*</span></label>
+                            <textarea formControlName="remarks" name="remarks" class="form-control"
+                                placeholder="Enter remarks"></textarea>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary mt-3" [disabled]="!form.valid">Submit</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+
+                <button id="discard" class="btn" data-dismiss="modal">Close</button>
+            </div>
+
+        </div>
+    </div>
+</div>

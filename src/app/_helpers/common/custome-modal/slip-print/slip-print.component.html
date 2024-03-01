@@ -1,0 +1,28 @@
+<div id="printIt" class="m-0 bg-light p-3 rounded">
+    <div class="text-center">
+        <img class="mb-3" src="assets/logo.png">
+        <h3 class="text-center">PAYMENT RECEPIT</h3>
+        <div class="form_blk w-75 mx-auto">
+            <table class="table table-bordered table-sm " *ngIf="recepitListObj ">
+                <tbody>
+                    <tr *ngFor="let recepit of recepitListObj|keyvalue">
+                        <td class="text-left">{{recepit.key}}</td>
+                        <td class="text-left">{{recepit.value}}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p *ngIf="!recepitListObj">Transaction not found</p>
+        </div>
+        <div class="text-center hideOnPrint d-print-none mt-2">
+            <button (click)="printInvoice()" class="btn btn-primary btn-sm px-3">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="feather feather-printer mr-1">
+                    <polyline points="6 9 6 2 18 2 18 9"></polyline>
+                    <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+                    <rect x="6" y="14" width="12" height="8"></rect>
+                </svg> Print Receipt</button>
+            <button class="btn btn-secondary ml-2" (click)="closeCallBack.emit()">Close</button>
+        </div>
+    </div>
+</div>

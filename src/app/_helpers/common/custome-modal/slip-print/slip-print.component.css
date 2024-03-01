@@ -1,0 +1,13 @@
+.form_blk {
+    max-height: 70vh;
+    overflow: auto;
+}
+
+.form_blk tr td {
+    width: 50%;
+}
+
+.form_blk tr td:first-child {
+    text-transform: uppercase;
+    font-weight: 700;
+}
